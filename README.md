@@ -112,27 +112,25 @@ We want to start adding powers to our wizards. We could just add them on to our 
 
 ```
 wizards
------
-| id | name | age | color | power |
------
+--
 ```
 
 but most wizards will probably have more than one power:
 
 ```
 wizards
------------------
+-----------
 | id | name | age | color | power_1 | power_2 |
------------------
+-----------
 ```
 
 and then some might have three:
 
 ```
 wizards
--------------------------
+-------------------
 | id | name | age | color | power_1 | power_2 | power_3
--------------------------
+-------------------
 ```
 
 and you can see now how we're in this predicament where a wizard can have any number of powers and our table has to keep scaling horizontally for each new wizard. If one wizard has 17 powers and another has only 1 power, that wizard with just 1 power is going to end up with 17 columns that are nil. Database tables don't scale that well horizontally like this. Also, you can see that we are starting to desribe a number of identical things. If we wanted to know which wizards have "Lightning Bolt" power, our statement would start to get pretty complicated with `OR`'s. What if a power has more attributes than just a name? Maybe they have an experience level, or we store how much damage they do? Do we make 17 more columns for each one of those attributes? `power_1_damage` etc.? That sounds like a mess.
@@ -154,9 +152,9 @@ wizards
 
 
 powers
-------
+
 | id | name | damage | wizard_name |
-------
+
 ```
 
 That could work, unless a wizard changes their name. Then we have to also find eveyr power we have associated with that wizard, and change the wizard_name attribute on it. Not very efficient. Can you think of another attribute we can store with the powers?
@@ -170,9 +168,7 @@ wizards
 
 
 powers
-----
-| id | name | damage | wizard_id |
-----
+-
 ```
 
 We call this convention a foreign key, in that it points to the primary key of another table. It is also called a reference, or reference key. What this means is that each power will now reference a wizard indicating the relationship between the power and the wizard is one in which a power belongs to a specific wizard.
@@ -209,9 +205,9 @@ Here is a list of powers you need to insert and the wizards they belong to:
 
 ```
 powers
----------
+---
 | name           | damage | wizard_id |
----------
+---
 | fire ball      |    7   |     1     |
 | ice storm      |   13   |     3     |
 | shape shift    |    0   |     4     |
@@ -220,7 +216,7 @@ powers
 | earth quake    |   15   |     2     |
 | tidal wave     |   44   |     4     |
 | teleport       |    0   |     3     |
----------
+---
 ```
 
 Create another file, `05_insert_powers.sql`, and compose statements to insert the above powers. Then, run that file against the database.
