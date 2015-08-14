@@ -178,7 +178,7 @@ Let's take a look at a create statement for that powers table:
 ```sql
 CREATE TABLE powers(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name STRING,
+  name TEXT,
   damage INTEGER,
   wizard_id INTEGER
 );
@@ -189,7 +189,7 @@ We know that the `id` column on the wizards table is an integer, so it shouldn't
 ```sql
 CREATE TABLE powers(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name STRING,
+  name TEXT,
   damage INTEGER,
   wizard_id INTEGER REFERENCES wizards
 );
