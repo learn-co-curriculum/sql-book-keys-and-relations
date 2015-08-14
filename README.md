@@ -157,7 +157,7 @@ powers
 
 ```
 
-That could work, unless a wizard changes their name. Then we have to also find eveyr power we have associated with that wizard, and change the wizard_name attribute on it. Not very efficient. Can you think of another attribute we can store with the powers?
+That could work, unless a wizard changes their name. Then we have to also find every power we have associated with that wizard, and change the wizard_name attribute on it. Not very efficient. Can you think of another attribute we can store with the powers?
 
 Yep, it's the `id`. Remember that our primary key's are responsible for being unique identifiers for the records in our database. We won't and shouldn't change the id primary key after it's been created. In fact, we've given the responsability of assigning them over to SQL completely by indicating `AUTOINCREMENT`.
 
