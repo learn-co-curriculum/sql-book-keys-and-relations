@@ -16,7 +16,7 @@ Really though, the simplest and most common way of applying a basic `PRIMARY KEY
 
 SQLite has built in mechanisms to help us do this automatically. The first is a special datatype we're going to make use of: `INTEGER PRIMARY KEY`. This datatype tells SQL that we are going to be storing integers, and that we will be using them as a primary key on this table.
 
-If we were to modify our origin `CREATE` statement for the wizards table to add an id column as a primary key it will read as:
+If we modify our original `CREATE` statement for the wizards table to add an id column as a primary key, it will read as:
 
 ```sql
 CREATE TABLE wizards(
@@ -62,7 +62,7 @@ sqlite > SELECT * FROM wizards;
 2|Bigby|40
 ```
 
-You can see how this is already useful to us. It's about to get a whole lot more useful, but first- lets make some changes to our existing magical.db
+You can see how this is already useful to us. It's about to get a whole lot more useful, but first let's make some changes to our existing magical.db
 
 Bad news, y'all. `PRIMARY KEY` columns can't be added to existing tables using `ALTER TABLE`. We're gonna have to drop our existing table and re-create it. That's ok though, because we saved all our work so far it won't be difficult!
 
@@ -135,7 +135,7 @@ wizards
 
 and you can see now how we're in this predicament where a wizard can have any number of powers and our table has to keep scaling horizontally for each new wizard. If one wizard has 17 powers and another has only 1 power, that wizard with just 1 power is going to end up with 17 columns that are nil. Database tables don't scale that well horizontally like this. Also, you can see that we are starting to desribe a number of identical things. If we wanted to know which wizards have "Lightning Bolt" power, our statement would start to get pretty complicated with `OR`'s. What if a power has more attributes than just a name? Maybe they have an experience level, or we store how much damage they do? Do we make 17 more columns for each one of those attributes? `power_1_damage` etc.? That sounds like a mess.
 
-We need to use what we know that a wizard has many powers, any number of powers. The first thing we need to do is to move powers into their own table:
+We need to use what we know: that a wizard has many powers, any number of powers. The first thing we need to do is to move powers into their own table:
 
 ```
 wizards
@@ -157,9 +157,9 @@ powers
 
 ```
 
-That could work, unless a wizard changes their name. Then we have to also find eveyr power we have associated with that wizard, and change the wizard_name attribute on it. Not very efficient. Can you think of another attribute we can store with the powers?
+That could work, unless a wizard changes their name. Then we also have to find every power we have associated with that wizard, and change the wizard_name attribute on it. Not very efficient. Can you think of another attribute we can store with the powers?
 
-Yep, it's the `id`. Remember that our primary key's are responsible for being unique identifiers for the records in our database. We won't and shouldn't change the id primary key after it's been created. In fact, we've given the responsability of assigning them over to SQL completely by indicating `AUTOINCREMENT`.
+Yep, it's the `id`. Remember that our primary keys are responsible for being unique identifiers for the records in our database. We won't and shouldn't change the id primary key after it's been created. In fact, we've given the responsability of assigning them over to SQL completely by indicating `AUTOINCREMENT`.
 
 So, we're going to use the wizard_id to indicate that powers relate to wizards.
 
@@ -171,7 +171,7 @@ powers
 -
 ```
 
-We call this convention a foreign key, in that it points to the primary key of another table. It is also called a reference, or reference key. What this means is that each power will now reference a wizard indicating the relationship between the power and the wizard is one in which a power belongs to a specific wizard.
+We call this convention a foreign key, in that it points to the primary key of another table. It is also called a reference, or reference key. What this means is that each power will now reference a wizard, indicating the relationship between the power and the wizard is one in which a power belongs to a specific wizard.
 
 Let's take a look at a create statement for that powers table:
 
@@ -195,7 +195,7 @@ CREATE TABLE powers(
 );
 ```
 
-Ok, we've now told SQL that our wizard_id column specifically references the wizards table. This will allow sql to make our queries more efficient, and ensure we are explicit about the use of this column in our schema.
+Ok, we've now told SQL that our wizard_id column specifically references the wizards table. This will allow SQL to make our queries more efficient and ensure we are explicit about the use of this column in our schema.
 
 Create `04_create_powers.sql`, store the above statement in it, and run it against the magical database.
 
