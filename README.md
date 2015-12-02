@@ -283,3 +283,5 @@ Exercises:
 - Select all the powers of the green wizard
 - Select any wizard who has a power that does exactly 0 damage
 - Select the wizard who has the lightning bolt power
+
+<a href='https://learn.co/lessons/sql-book-keys-and-relations' data-visibility='hidden'>View this lesson on Learn.co</a>
