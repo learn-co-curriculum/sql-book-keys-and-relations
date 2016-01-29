@@ -284,4 +284,4 @@ Exercises:
 - Select any wizard who has a power that does exactly 0 damage
 - Select the wizard who has the lightning bolt power
 
-<a href='https://learn.co/lessons/sql-book-keys-and-relations' data-visibility='hidden'>View this lesson on Learn.co</a>
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/sql-book-keys-and-relations' title='Keys and Relations'>Keys and Relations</a> on Learn.co and start learning to code for free.</p>
